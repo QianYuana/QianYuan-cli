@@ -4,10 +4,10 @@
   "main": "index.js",
   "type": "module",
   "bin": {
-    "create_QianYuan": "index.js"
+    "QianYuan": "index.js"
   },
   "scripts": {
-    "create_QianYuan": "node index.js"
+    "start": "node index.js"
   },
   "author": "",
   "license": "ISC",
