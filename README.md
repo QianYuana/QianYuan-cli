@@ -28,5 +28,8 @@ npm install -g .
 使用命令
 
 ```
-create_QianYuan
+QianYuan create   // 创建项目
+QianYuan help     // 帮助
+QianYuan --version | -v  // 查看版本
+
 ```

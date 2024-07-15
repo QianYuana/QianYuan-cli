@@ -1,0 +1,18 @@
+/.idea/
+target/
+/.vscode
+*.DS_Store
+node_modules/
+*node_modules/
+WebRoot
+one.bat
+one.sh
+server.xml
+# dihog.dll.js
+# dihog-manifest.json
+web-version.properties
+/dist/
+# /com.amugua.wms.web/.settings/
+# /com.amugua.wms.web/bin/
+# /com.amugua.wms.web/Web/
+# /com.amugua.wms.web/login_info_record.json
