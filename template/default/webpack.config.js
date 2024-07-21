@@ -6,7 +6,7 @@ const version = require("./package.json").version;
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
-  entry: "./index.js", // 项目入口文件
+  entry: "./src/index.js", // 项目入口文件
   output: {
     filename: "bundle.js", // 打包后的文件名
     path: path.resolve(__dirname, "dist"), // 打包后的目录
