@@ -4,7 +4,7 @@ import { Navigate } from "react-router-dom";
 
 
 // 定义一些路由组件（可选）
-import LoginPage from "../modules/demo/index";
+import LoginPage from "../modules/login/index.tsx";
 const HomePage = () => <div>我是首页</div>;
 // const LoginPage  = React.lazy(() => import("../modules/demo/index"));
 // const LoginPage = () => <div>我是登录</div>;

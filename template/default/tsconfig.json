@@ -1,0 +1,20 @@
+{  
+  "compilerOptions": { // TypeScript 编译器的选项配置  
+    "outDir": "./dist/", // 编译后输出的目录  
+    "module": "esnext", // 指定生成哪个模块系统代码，这里使用最新的 ECMAScript 模块系统  
+    "target": "es5", // 指定 ECMAScript 目标版本，这里输出为 ES5 代码以保证兼容性  
+    "jsx": "react", // 在 .tsx 文件里支持 JSX  
+    "allowJs": true, // 允许编译 JavaScript 文件  
+    "sourceMap": true, // 生成相应的 `.map` 文件，用于调试  
+    "esModuleInterop": true, // 允许通过 import 作为默认导出的 CommonJS 模块  
+    "allowSyntheticDefaultImports": true, // 允许从没有设置默认导出的模块中默认导入  
+    "strict": true, // 启用所有严格类型检查选项  
+    "forceConsistentCasingInFileNames": true, // 禁止对同一文件的不一致的引用  
+    "moduleResolution": "node", // 模块解析策略，这里使用 Node.js 风格的解析  
+    "resolveJsonModule": true, // 允许导入 `.json` 文件  
+    "isolatedModules": true, // 将每个文件作为单独的模块（与某些构建系统的“隔离模式”一起使用）  
+    // "noEmit": true, // 这行被移除了，因为它会阻止 TypeScript 生成文件  
+    "skipLibCheck": true // 跳过声明文件的类型检查  
+  },  
+  "include": ["src/**/*"] // 需要编译的文件的匹配模式，这里包含 src 目录下所有文件  
+}
