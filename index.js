@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-
 import inquirer from "inquirer";
 import { exec } from "child_process";
 import ora from "ora";
@@ -19,7 +18,7 @@ const packageJsonPath = path.join(__dirname, "package.json");
 const packageJson = JSON.parse(readFileSync(packageJsonPath, "utf-8"));
 const version = packageJson.version;
 
-console.log(process.argv, "ceshi");
+// console.log(process.argv, "ceshi");
 if (process.argv.includes("--version") || process.argv.includes("-v")) {
   console.log(`create_QianYuan version: ${version}`);
   process.exit(0); //立即终止 Node.js 进程的
