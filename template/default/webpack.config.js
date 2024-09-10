@@ -2,7 +2,6 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const version = require("./package.json").version;
-
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
@@ -69,6 +68,7 @@ module.exports = {
     extensions: [".tsx", ".ts", ".js", ".jsx"],
     alias: {
       public: path.resolve(__dirname, "public/"),
+      untils: path.resolve(__dirname, "src/untils"),
     },
   },
   plugins: [
@@ -102,6 +102,15 @@ module.exports = {
     static: {
       directory: path.join(__dirname, "public"),
     },
+    // 禁用错误遮罩层
+    client: {
+      overlay: false,
+    },
+    // 或者自定义错误遮罩层
+    //  overlay: {
+    //    errors: true,
+    //    warnings: false,
+    //  },
     compress: true,
     hot: true,
     port: 9000,

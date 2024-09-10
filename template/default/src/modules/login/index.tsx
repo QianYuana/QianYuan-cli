@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import type { FormProps } from "antd";
-import { Button, Checkbox, Form, Input } from "antd";
+import { Button, Spin, Form, Input, message } from "antd";
+import { observer } from "mobx-react";
+import { useStores } from "./store";
+import { toJS } from "mobx";
+import RememberT from "./components/remember";
+import { Cookie } from "untils";
 import "./index.scss";
 
 type FieldType = {
@@ -8,53 +13,44 @@ type FieldType = {
   password?: string;
   remember?: string;
 };
-interface IAppProps {}
-interface RememberType {
-  /**
-   *
-   * @param value 是否勾选
-   * @function onChange :(value: boolean) => {} 勾选回调函数
-   * @function onForget :() => void 忘记密码回调函数
-   */
-  onChange?: (value: boolean) => {};
-  value?: boolean;
-  onForget: () => void;
+interface IAppProps {
+  title?: string;
 }
-const RememberT = (props: RememberType) => {
-  return (
-    <div
-      style={{
-        width: "350px",
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-      }}
-    >
-      <Checkbox
-        onChange={(e) => props.onChange && props.onChange(e.target.checked)}
-        checked={props.value}
-      >
-        记住密码
-      </Checkbox>
-      <a href="#" onClick={props.onForget}>
-        忘记密码?
-      </a>
-    </div>
-  );
-};
-const App: React.FunctionComponent<IAppProps> = (props) => {
-  const [loginStatus, setLoginStatus] = useState<number>(1);
+
+const App: React.FunctionComponent<IAppProps> = observer((props) => {
+  // const [loginStatus, setLoginStatus] = useState<number>(1);
   const [form] = Form.useForm(); //登录表单
   const [logonForm] = Form.useForm(); //注册表单
+  const { mainStore } = useStores();
+  const { loginStatus, setLoginStatus, isLogin } = toJS(mainStore);
+
   const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
     console.log("Success:", values);
+    mainStore.login(values).then((res) => {
+      if (res.status == "success") {
+        message.destroy();
+        message.success("登录成功");
+        form.resetFields();
+      } else {
+        message.destroy();
+        message.error(res.msg);
+      }
+    });
   };
-
-  const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (
-    errorInfo
-  ) => {
-    console.log("Failed:", errorInfo);
+  const onFinishLogon: FormProps<FieldType>["onFinish"] = (values) => {
+    console.log("Success:", values);
+    mainStore.addUser(values).then((res) => {
+      if (res.status == "success") {
+        message.destroy();
+        message.success("注册成功");
+        logonForm.resetFields();
+        setLoginStatus(1);
+      }
+    });
   };
+  useEffect(() => {
+    console.log(mainStore.isLogin);
+  }, [mainStore]);
   return (
     <div className="login">
       <img
@@ -150,12 +146,12 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
         />
         {loginStatus == 1 ? (
           <Form
+            key={loginStatus}
             form={form}
             labelCol={{ span: 8 }}
             wrapperCol={{ span: 16 }}
             initialValues={{ remember: true }}
             onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
           >
             <Form.Item<FieldType>
               name="username"
@@ -194,6 +190,7 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
                 type="primary"
                 onClick={() => {
                   setLoginStatus(2);
+                  form.resetFields();
                 }}
                 style={{ width: "350px", background: "#AE62E7" }}
               >
@@ -203,12 +200,12 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
           </Form>
         ) : (
           <Form
+            key={loginStatus}
             form={logonForm}
             labelCol={{ span: 8 }}
             wrapperCol={{ span: 16 }}
             initialValues={{ remember: true }}
-            onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
+            onFinish={onFinishLogon}
           >
             <Form.Item<FieldType>
               name="username"
@@ -231,6 +228,7 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
             <Form.Item wrapperCol={{ span: 16 }}>
               <Button
                 type="primary"
+                loading={isLogin}
                 htmlType="submit"
                 style={{ width: "350px", background: "#AE62E7" }}
               >
@@ -246,6 +244,7 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
                   color: "#AE62E7",
                 }}
                 onClick={() => {
+                  logonForm.resetFields();
                   setLoginStatus(1);
                 }}
               >
@@ -257,6 +256,6 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
       </div>
     </div>
   );
-};
+});
 
 export default App;
