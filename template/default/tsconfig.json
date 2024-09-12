@@ -19,7 +19,9 @@
     "experimentalDecorators": true, // 启用装饰器
     "baseUrl": "./",
     "paths": {
-      "untils": ["src/untils"]
+      "untils": ["src/untils"],
+      "sassBase": ["src/untils/sass/base"],
+      "appStore": ["src/store"],
     }
   },
   "include": ["src/**/*"] // 需要编译的文件的匹配模式，这里包含 src 目录下所有文件

@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import type { FormProps } from "antd";
 import { Button, Spin, Form, Input, message } from "antd";
+import { useNavigate } from "react-router-dom";
 import { observer } from "mobx-react";
-import { useStores } from "./store";
 import { toJS } from "mobx";
+
+import { useStores } from "./store";
 import RememberT from "./components/remember";
-import { Cookie } from "untils";
 import "./index.scss";
 
 type FieldType = {
@@ -18,11 +19,11 @@ interface IAppProps {
 }
 
 const App: React.FunctionComponent<IAppProps> = observer((props) => {
-  // const [loginStatus, setLoginStatus] = useState<number>(1);
   const [form] = Form.useForm(); //登录表单
   const [logonForm] = Form.useForm(); //注册表单
   const { mainStore } = useStores();
   const { loginStatus, setLoginStatus, isLogin } = toJS(mainStore);
+  let navigate = useNavigate();
 
   const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
     console.log("Success:", values);
@@ -31,6 +32,7 @@ const App: React.FunctionComponent<IAppProps> = observer((props) => {
         message.destroy();
         message.success("登录成功");
         form.resetFields();
+        navigate("/home");
       } else {
         message.destroy();
         message.error(res.msg);

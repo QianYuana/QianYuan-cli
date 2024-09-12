@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { createRoot } from "react-dom/client";
 import { RouterProvider } from "react-router-dom";
-import "./index.css";
+import "./index.scss";
 import { ConfigProvider } from "antd";
 import dayjs from "dayjs";
 import "dayjs/locale/zh-cn";
