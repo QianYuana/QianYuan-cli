@@ -38,8 +38,17 @@ http.interceptors.request.use(
 http.interceptors.response.use(
   function (response) {
     // 对响应数据做点什么
-    console.log("response", response);
-
+    if (["/login"].includes(response.config?.url)) {
+      Cookie.setUserCookie(
+        "token",
+        response.data?.resultObject?.token,
+        86400000
+      );
+      let data = JSON.parse(JSON.stringify(response.data?.resultObject));
+      delete data.token;
+      let result = { ...response.data, resultObject: data };
+      response.data = result;
+    }
     return response;
   },
   function (error) {

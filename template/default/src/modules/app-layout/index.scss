@@ -1,0 +1,35 @@
+@import "../../untils/sass/base/colors.scss";
+.ant-layout-sider-children {
+  .trigger:hover {
+    color: $primary-color;
+  }
+  .logo {
+    height: 32px;
+    margin: 16px;
+    display: flex;
+    align-items: center;
+    // background: $border-margin-color;
+    span,
+    b,
+    em {
+      color: $white-color;
+      font-size: 24px;
+    }
+  }
+  .ant-menu-item {
+    color: $white-color;
+  }
+}
+.ant-layout-sider {
+  background: $main-bc;
+}
+.site-layout .site-layout-background {
+  background: $white-color;
+}
+.trigger {
+  padding: 0 24px;
+  font-size: 18px;
+  line-height: 64px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
