@@ -50,9 +50,6 @@ const App: React.FunctionComponent<IAppProps> = observer((props) => {
       }
     });
   };
-  useEffect(() => {
-    console.log(mainStore.isLogin);
-  }, [mainStore]);
   return (
     <div className="login">
       <img
