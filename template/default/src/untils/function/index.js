@@ -7,6 +7,5 @@ export const routeToNameMap = (routeList, path) => {
     acc[cur.path] = cur.name;
     return acc; // 确保返回累加器
   }, {});
-  console.log(ac, "转换");
   return ac[path];
 };

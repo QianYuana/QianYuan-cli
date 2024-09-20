@@ -1,6 +1,5 @@
 import { makeAutoObservable } from "mobx";
 import { PrinterOutlined, CodeSandboxOutlined } from "@ant-design/icons";
-import { lazy } from "react";
 interface Res {
   [key: string]: any;
 }
@@ -11,14 +10,12 @@ class MainStore {
       name: "文档打印组件",
       path: "print",
       icon: PrinterOutlined,
-      isCache: false,
       element: () => import("../modules/documents-print"),
     },
     {
       name: "three自定义生成",
       path: "three",
       icon: CodeSandboxOutlined,
-      isCache: false,
       element: () => import("../modules/thress-generation"),
     },
   ];
@@ -41,7 +38,6 @@ class MainStore {
   removeCacheList = (path: string) => {
     return new Promise((resolve, reject) => {
       const index = this.cacheList.indexOf(path);
-      console.log(index, "移除缓存");
       let result = "";
       if (this.cacheList[index + 1]) {
         result = this.cacheList[index + 1];

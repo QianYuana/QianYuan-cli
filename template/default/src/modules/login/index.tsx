@@ -26,7 +26,6 @@ const App: React.FunctionComponent<IAppProps> = observer((props) => {
   let navigate = useNavigate();
 
   const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
-    console.log("Success:", values);
     mainStore.login(values).then((res) => {
       if (res.status == "success") {
         message.destroy();
@@ -40,7 +39,6 @@ const App: React.FunctionComponent<IAppProps> = observer((props) => {
     });
   };
   const onFinishLogon: FormProps<FieldType>["onFinish"] = (values) => {
-    console.log("Success:", values);
     mainStore.addUser(values).then((res) => {
       if (res.status == "success") {
         message.destroy();

@@ -75,7 +75,7 @@ function MyEditor(props: IProps) {
       if (imageNode == null) return;
 
       const { src, alt, url, href } = imageNode;
-      console.log("inserted image", src, alt, url, href);
+      // console.log("inserted image", src, alt, url, href);
     },
     checkImage: customCheckImageFn, // 也支持 async 函数
     parseImageSrc: customParseImageSrc, // 也支持 async 函数
@@ -88,7 +88,7 @@ function MyEditor(props: IProps) {
       if (imageNode == null) return;
 
       const { src, alt, url } = imageNode;
-      console.log("updated image", src, alt, url);
+      // console.log("updated image", src, alt, url);
     },
     checkImage: customCheckImageFn, // 也支持 async 函数
     parseImageSrc: customParseImageSrc, // 也支持 async 函数

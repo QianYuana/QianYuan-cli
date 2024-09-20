@@ -7,8 +7,6 @@ const interceptRoute = (WrappedComponent: React.FC<{ [x: string]: any }>) => {
     const location = useLocation();
     const [renderData, setRenderData] = useState<any>(null);
     useEffect(() => {
-      console.log("location", location);
-
       if (location.pathname !== "/login") {
         setRenderData(navigate());
       } else {

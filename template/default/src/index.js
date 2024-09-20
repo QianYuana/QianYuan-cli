@@ -14,9 +14,10 @@ const container = document.getElementById("root");
 const root = createRoot(container);
 root.render(
   // <React.StrictMode>
-    <ConfigProvider locale={zhCN}>
-      <RouterProvider router={router} />
-    </ConfigProvider>
+  <ConfigProvider locale={zhCN}>
+    <RouterProvider router={router} />
+  </ConfigProvider>
+
   // </React.StrictMode>
 );
 // ReactDOM.render(

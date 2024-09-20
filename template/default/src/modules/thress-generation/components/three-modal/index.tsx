@@ -66,8 +66,6 @@ const ThreeModal: React.FunctionComponent<IAppProps> = (props) => {
   };
 
   useEffect(() => {
-    console.log(11111);
-
     webGLInit();
   }, []);
 
