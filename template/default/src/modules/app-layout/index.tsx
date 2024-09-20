@@ -1,5 +1,5 @@
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
-import { Layout, Menu } from "antd";
+import { Layout, Menu, Tag } from "antd";
 import {
   Route,
   Routes,
@@ -9,18 +9,43 @@ import {
 } from "react-router-dom";
 import React, { useEffect, useState, lazy, Suspense } from "react";
 import { useAppStores } from "appStore";
+import { Utils } from "untils";
+import { observer } from "mobx-react";
 
 import { toJS } from "mobx";
 import "./index.scss";
 
 const { Header, Sider, Content } = Layout;
 
-const App: React.FC = () => {
+const App: React.FC = observer(() => {
   const [collapsed, setCollapsed] = useState(false);
   const { appStores } = useAppStores();
-  const { routeList } = toJS(appStores);
+  const { routeList, cacheList } = toJS(appStores);
   const location = useLocation();
   const navigate = useNavigate();
+  const [key, setKey] = useState(Math.random());
+
+  useEffect(() => {
+    setKey(Math.random());
+    appStores.setCacheList(location.pathname.split("/")[2]);
+  }, [location]);
+
+  /**
+   * 关闭标签  删除缓存列表
+   * @param e
+   * @param item
+   */
+  const close = (e: React.MouseEvent<HTMLElement>, item: any) => {
+    appStores.removeCacheList(item).then((res: unknown) => {
+      const result = res as string; // 类型断言
+      // 或者使用类型保护
+      if (typeof result !== "string") {
+        throw new Error("Expected a string");
+      }
+      // 处理字符串逻辑
+      navigate(result);
+    });
+  };
 
   return (
     <Layout style={{ height: "100vh" }}>
@@ -49,6 +74,7 @@ const App: React.FC = () => {
         <Menu
           theme="dark"
           mode="inline"
+          key={key}
           defaultSelectedKeys={[location.pathname.split("/")[2]]}
           items={routeList.map((item) => ({
             key: item.path,
@@ -57,6 +83,7 @@ const App: React.FC = () => {
           }))}
           onClick={(e) => {
             navigate(e.key);
+            appStores.setCacheList(e.key);
           }}
         />
       </Sider>
@@ -69,6 +96,24 @@ const App: React.FC = () => {
               onClick: () => setCollapsed(!collapsed),
             }
           )}
+          {cacheList.map((item) => {
+            return (
+              <Tag
+                color={
+                  item == location.pathname.split("/")[2] ? "blue" : "default"
+                }
+                key={item}
+                style={{ cursor: "pointer" }}
+                closable
+                onClose={(e) => {
+                  e.preventDefault();
+                  close(e, item);
+                }}
+              >
+                {Utils.routeToNameMap(routeList, item)}
+              </Tag>
+            );
+          })}
         </Header>
         <Content
           className="site-layout-background"
@@ -96,6 +141,6 @@ const App: React.FC = () => {
       </Layout>
     </Layout>
   );
-};
+});
 
 export default App;

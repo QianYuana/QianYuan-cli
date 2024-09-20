@@ -13,11 +13,11 @@ dayjs.locale("zh-cn");
 const container = document.getElementById("root");
 const root = createRoot(container);
 root.render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <ConfigProvider locale={zhCN}>
       <RouterProvider router={router} />
     </ConfigProvider>
-  </React.StrictMode>
+  // </React.StrictMode>
 );
 // ReactDOM.render(
 //  ,

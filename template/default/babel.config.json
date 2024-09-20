@@ -1,7 +1,8 @@
 {
-  "presets": ["@babel/preset-env", "@babel/preset-react"], // 如果你在使用 React，请添加这个预设  
+  "presets": ["@babel/preset-env", "@babel/preset-react"], // 如果你在使用 React，请添加这个预设
   "plugins": [
     ["@babel/plugin-proposal-decorators", { "legacy": true }], // 注意：'legacy' 选项在 Babel 7 中是可选的，但在某些情况下可能需要它
-    ["@babel/plugin-proposal-class-properties", { "loose": true }] // 'loose' 模式可以提供更小的构建结果，但可能不完全符合 ECMAScript 提案
+    ["@babel/plugin-proposal-class-properties", { "loose": true }], // 'loose' 模式可以提供更小的构建结果，但可能不完全符合 ECMAScript 提案
+    "react-activation/babel"
   ]
 }
