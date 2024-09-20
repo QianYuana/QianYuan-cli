@@ -17,7 +17,6 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
   const printInit = () => {
     if (!window.LODOP) {
       let LODOP = getLodop();
-      console.log(LODOP);
 
       if (typeof LODOP == "string") {
         setMessage(
@@ -37,7 +36,7 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
     if (!window.LODOP) {
       printInit();
     }
-    console.log(codeRender(props.html));
+    // console.log(codeRender(props.html));
     window.LODOP.PRINT_INIT("预览打印文档"); //打印初始化
     let strStyle = baseTableStyle;
     const textHeight: number | any =

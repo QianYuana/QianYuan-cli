@@ -22,7 +22,8 @@
       "untils": ["src/untils"],
       "sassBase": ["src/untils/sass/base"],
       "appStore": ["src/store"],
+      "components": ["src/components"]
     }
   },
-  "include": ["src/**/*" ,  "**/*.d.ts"] // 需要编译的文件的匹配模式，这里包含 src 目录下所有文件
+  "include": ["src/**/*", "**/*.d.ts"] // 需要编译的文件的匹配模式，这里包含 src 目录下所有文件
 }

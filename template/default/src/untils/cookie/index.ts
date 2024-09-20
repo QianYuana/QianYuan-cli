@@ -8,7 +8,7 @@
 export const setUserCookie = (name:string, value:string, expires:number) => {
     var date:Date = new Date();
     date.setTime(date.getTime() + expires);
-    console.log("时间", date.setTime(date.getTime() + expires));
+    // console.log("时间", date.setTime(date.getTime() + expires));
     document.cookie =
       name + "=" + escape(value) + ";expires=" + date.toUTCString();
     // document.cookie = name + "=" + (value || "")  + expires + "; ";

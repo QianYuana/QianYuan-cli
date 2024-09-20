@@ -19,8 +19,6 @@ if (process.env.NODE_ENV == "development") {
 
 http.interceptors.request.use(
   function (config) {
-    console.log("request", config);
-    console.log("request", Cookie.getCookie("token"));
     // 在发送请求之前做些什么
     if (["/add_users"].includes(config.url)) {
       return config;
@@ -54,7 +52,6 @@ http.interceptors.response.use(
   function (error) {
     // 超出 2xx 范围的状态码都会触发该函数。
     // 对响应错误做点什么
-    console.log("error", error);
 
     return Promise.reject(error);
   }

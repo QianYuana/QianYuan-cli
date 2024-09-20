@@ -71,7 +71,7 @@ module.exports = {
       untils: path.resolve(__dirname, "src/untils"),
       sassBase: path.resolve(__dirname, "src/untils/sass/base"),
       appStore: path.resolve(__dirname, "src/store"),
-      // components: path.resolve(__dirname, "src/components"),
+      components: path.resolve(__dirname, "src/components"),
     },
   },
   plugins: [

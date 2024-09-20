@@ -10,8 +10,9 @@ import {
 import React, { useEffect, useState, lazy, Suspense } from "react";
 import { useAppStores } from "appStore";
 import { Utils } from "untils";
+import { KeepComponent, LazyComponent } from "components";
+import { AliveScope, useAliveController } from "react-activation";
 import { observer } from "mobx-react";
-
 import { toJS } from "mobx";
 import "./index.scss";
 
@@ -23,6 +24,7 @@ const App: React.FC = observer(() => {
   const { routeList, cacheList } = toJS(appStores);
   const location = useLocation();
   const navigate = useNavigate();
+  const { refreshScope, clear } = useAliveController()
   const [key, setKey] = useState(Math.random());
 
   useEffect(() => {
@@ -107,7 +109,11 @@ const App: React.FC = observer(() => {
                 closable
                 onClose={(e) => {
                   e.preventDefault();
+                  refreshScope(item)
                   close(e, item);
+                }}
+                onClick={() => {
+                  navigate(item);
                 }}
               >
                 {Utils.routeToNameMap(routeList, item)}
@@ -123,12 +129,14 @@ const App: React.FC = observer(() => {
             minHeight: 280,
           }}
         >
-          <Suspense fallback={<div>拼命加载中...</div>}>
+          <AliveScope>
             <Routes>
               {routeList.map((item) => {
-                const LazyComponent = lazy(item.element);
                 return (
-                  <Route path={item.path} element={<LazyComponent />}></Route>
+                  <Route
+                    path={item.path}
+                    element={<KeepComponent {...item} />}
+                  ></Route>
                 );
               })}
               <Route
@@ -136,7 +144,7 @@ const App: React.FC = observer(() => {
                 element={<Navigate replace to={routeList[0].path} />}
               ></Route>
             </Routes>
-          </Suspense>
+          </AliveScope>
         </Content>
       </Layout>
     </Layout>
