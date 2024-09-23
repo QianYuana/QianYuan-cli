@@ -6,7 +6,7 @@ QianYuan-cli 是通过深入学习，尝试自己搭建的脚手架。
 
 **支持的脚手架：** 为了方便更多的选择，同时集成了 Vue-Cli、Vite、Create-React-App....
 
-**技术选型：** Webpack、Babel、node、inquirer、ora....
+**技术选型：** 集成 Webpack、Babel、node、inquirer、ora...... 
 
 **目前进度：** 目前还在基础搭建模版中，后续会增加功能。
 
@@ -43,14 +43,14 @@ QianYuan --version | -v  // 查看版本
 - 编译工具：babel
 - 状态管理：mobx
 - 路由：react-router v6 
-- keepAlive缓存：:react-activation
+- keepAlive缓存：react-activation
 - 请求：axios
-- 样式：sass
-- node命令工具：:concurrently 
-- UI库：:Ant Design
-- 文档编辑器：:wangeditor 5
-- 打印:c-lodop
-- 3d：:three.js
+- 样式：sass 
+- 命令工具: concurrently
+- UI库：Ant Design
+- 文档编辑器：wangeditor 5
+- 打印：c-lodop
+- 可视化3d：three.js
 ### 框架已完成功能：
 - 基础配置 ：
     - webpack配置：多页面打包配置
