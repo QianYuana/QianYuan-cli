@@ -10,7 +10,7 @@ import {
 import React, { useEffect, useState, lazy, Suspense } from "react";
 import { useAppStores } from "appStore";
 import { Utils } from "untils";
-import { KeepComponent, LazyComponent } from "components";
+import { KeepComponent, LazyComponent, DragTel, DragItem } from "components";
 import { AliveScope, useAliveController } from "react-activation";
 import { observer } from "mobx-react";
 import { toJS } from "mobx";
@@ -24,12 +24,20 @@ const App: React.FC = observer(() => {
   const { routeList, cacheList } = toJS(appStores);
   const location = useLocation();
   const navigate = useNavigate();
-  const { refreshScope, clear } = useAliveController()
+  const { refreshScope, clear } = useAliveController();
   const [key, setKey] = useState(Math.random());
 
   useEffect(() => {
     setKey(Math.random());
-    appStores.setCacheList(location.pathname.split("/")[2]);
+    console.log(location.pathname.split("/")[2]);
+
+    if (location.pathname.split("/")[2]) {
+      document.title = Utils.routeToNameMap(
+        routeList,
+        location.pathname.split("/")[2]
+      );
+      appStores.setCacheList(location.pathname.split("/")[2]);
+    }
   }, [location]);
 
   /**
@@ -90,7 +98,10 @@ const App: React.FC = observer(() => {
         />
       </Sider>
       <Layout className="site-layout">
-        <Header className="site-layout-background" style={{ padding: 0 }}>
+        <Header
+          className="site-layout-background"
+          style={{ padding: 0, display: "flex", alignItems: "center" }}
+        >
           {React.createElement(
             collapsed ? MenuUnfoldOutlined : MenuFoldOutlined,
             {
@@ -98,28 +109,44 @@ const App: React.FC = observer(() => {
               onClick: () => setCollapsed(!collapsed),
             }
           )}
-          {cacheList.map((item) => {
-            return (
-              <Tag
-                color={
-                  item == location.pathname.split("/")[2] ? "blue" : "default"
-                }
-                key={item}
-                style={{ cursor: "pointer" }}
-                closable
-                onClose={(e) => {
-                  e.preventDefault();
-                  refreshScope(item)
-                  close(e, item);
-                }}
-                onClick={() => {
-                  navigate(item);
-                }}
-              >
-                {Utils.routeToNameMap(routeList, item)}
-              </Tag>
-            );
-          })}
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <DragTel
+              list={cacheList.map((item) => {
+                return { id: item, value: item };
+              })}
+              onChange={(items) => {
+                let arr = items.map((item: { id: any }) => item.id);
+                appStores.drgCacheList(arr);
+              }}
+            >
+              {cacheList.map((item) => {
+                return (
+                  <DragItem id={item} key={item}>
+                    <Tag
+                      color={
+                        item == location.pathname.split("/")[2]
+                          ? "blue"
+                          : "default"
+                      }
+                      key={item}
+                      style={{ cursor: "pointer" }}
+                      closable
+                      onClose={(e) => {
+                        e.preventDefault();
+                        refreshScope(item);
+                        close(e, item);
+                      }}
+                      onClick={() => {
+                        navigate(item);
+                      }}
+                    >
+                      {Utils.routeToNameMap(routeList, item)}
+                    </Tag>
+                  </DragItem>
+                );
+              })}
+            </DragTel>
+          </div>
         </Header>
         <Content
           className="site-layout-background"

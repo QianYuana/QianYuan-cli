@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { getLodop } from "./LodopFuncs";
-import { Button } from "antd";
+import { Button, Select } from "antd";
 import { baseTableStyle, codeRender } from "./printConfig";
+import PrintConfigForm from "./printConfigForm";
+import { salesSlip } from "./config/dataSource";
 
 interface IAppProps {
   html: any;
@@ -11,9 +13,16 @@ declare global {
     LODOP: any;
   }
 }
+interface ConfigType {
+  form: {
+    getFieldsValue: () => any;
+  };
+}
 
 const App: React.FunctionComponent<IAppProps> = (props) => {
   const [message, setMessage] = useState("");
+  const configRef = useRef<ConfigType | null>();
+  const [printTarget, setPrintTarget] = useState("document");
   const printInit = () => {
     if (!window.LODOP) {
       let LODOP = getLodop();
@@ -32,46 +41,59 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
       setMessage("");
     }
   };
-  const printPageView = () => {
+  const execution = ({ text = "预览打印文档", type = "1" }) => {
     if (!window.LODOP) {
       printInit();
     }
-    // console.log(codeRender(props.html));
-    window.LODOP.PRINT_INIT("预览打印文档"); //打印初始化
+    const {
+      paperSize,
+      printerName,
+      printerNum,
+      printerOrientation,
+      printerPaper,
+      printerSize,
+    } = configRef.current?.form?.getFieldsValue();
+    window.LODOP.PRINT_INIT(text); //打印初始化
+    window.LODOP.SEND_PRINT_RAWDATA(printerName); //设置打印机
+    window.LODOP.SET_PRINTER_INDEX(printerName); //设置打印机序号
+    window.LODOP.SET_PRINT_PAGESIZE(
+      printerOrientation,
+      paperSize.width || 0,
+      paperSize.height || 0,
+      printerPaper
+    ); //设置纸张
+    window.LODOP.SET_PRINT_COPIES(printerNum || 1); //设置打印份数
+    window.LODOP.SET_PRINT_MODE("PRINT_PAGE_PERCENT", "Auto-Width"); //按整宽不变形缩放
+    window.LODOP.SET_SHOW_MODE("AUTO_CLOSE_PREWINDOW", true); // 打印完后自动关闭窗口
     let strStyle = baseTableStyle;
     const textHeight: number | any =
       document.getElementById("w-e-textarea-1")?.clientHeight;
     // window.LODOP.ADD_PRINT_RECT(27,27,634,textHeight,0,1); //打印区域  左 上 右 下
-    window.LODOP.SET_PRINT_STYLEA(2, "FontSize", 18); //字体大小
-    window.LODOP.SET_PRINT_STYLEA(2, "Bold", 1); //字体加粗
+    let html = printTarget == "document" ? props.html : salesSlip;
     window.LODOP.ADD_PRINT_HTM(
       27,
       27,
       634,
       textHeight,
-      strStyle + "<div>" + codeRender(props.html) + "</div>"
+      strStyle + "<div id='print-footer'>" + codeRender(html) + "</div>"
     ); //打印html
+    const footerHeight: number | any =
+      document.getElementById("print-footer")?.clientHeight;
     window.LODOP.ADD_PRINT_TEXT(
-      textHeight + 20,
+      footerHeight + 20,
       27,
       634,
       30,
-      "注：其中《表单一》按显示大小，《表单二》在程序控制宽度(285px)内自适应调整"
+      "注：测试底部文字，测试底部文字，测试底部文字，测试底部文字，测试底部文字，测试底部文字，测试底部文字，测试底部文字，测试底部文字，测试底部文字，"
     );
-    window.LODOP.PREVIEW(); //最后一个打印(预览)语句
-  };
-  const printStart = () => {
-    if (!window.LODOP) {
-      printInit();
-    }
-    window.LODOP.PRINT_INIT("直接打印文档"); //打印初始化
-    let strStyle = `<style> 打印的样式需要写在这里，下面引入</style> `;
-    window.LODOP.ADD_PRINT_HTM(100, "5%", "90%", 450, strStyle + props.html);
-    window.LODOP.PRINT(); //最后一个打印(直接打印)语句
+    window.LODOP.SET_PRINT_STYLEA(1, "FontSize", printerSize); //字体大小
+    window.LODOP.SET_PRINT_STYLEA(1, "Bold", 1); //字体加粗
+    type === "1" ? window.LODOP.PREVIEW() : window.LODOP.PRINT();
   };
   useEffect(() => {
     setTimeout(() => {
       printInit();
+      clearTimeout(1);
     }, 1000);
   }, []);
   return (
@@ -81,15 +103,47 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
       ) : (
         <div dangerouslySetInnerHTML={{ __html: message }}></div>
       )}
+      <div>
+        <PrintConfigForm ref={configRef} printInit={printInit} />
+      </div>
+      <div
+        style={{ marginBottom: "12px", display: "flex", alignItems: "center" }}
+      >
+        <p>打印模版：</p>
+        <Select
+          defaultValue="document"
+          style={{ width: 120 }}
+          onChange={(value: string) => {
+            setPrintTarget(value);
+          }}
+          options={[
+            {
+              value: "document",
+              label: "左侧文档",
+            },
+            {
+              value: "salesSlip",
+              label: "销售单",
+            },
+          ]}
+        />
+      </div>
       <div style={{ display: "flex" }}>
         <Button
           type="primary"
-          onClick={printStart}
+          onClick={() => {
+            execution({ text: "直接打印文档", type: "2" });
+          }}
           style={{ marginRight: "12px" }}
         >
           打印
         </Button>
-        <Button type="primary" onClick={printPageView}>
+        <Button
+          type="primary"
+          onClick={() => {
+            execution({ text: "预览打印文档", type: "1" });
+          }}
+        >
           预览打印
         </Button>
       </div>

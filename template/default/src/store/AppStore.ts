@@ -1,5 +1,9 @@
 import { makeAutoObservable } from "mobx";
-import { PrinterOutlined, CodeSandboxOutlined } from "@ant-design/icons";
+import {
+  PrinterOutlined,
+  CodeSandboxOutlined,
+  EyeInvisibleOutlined,
+} from "@ant-design/icons";
 interface Res {
   [key: string]: any;
 }
@@ -18,8 +22,14 @@ class MainStore {
       icon: CodeSandboxOutlined,
       element: () => import("../modules/thress-generation"),
     },
+    {
+      name: "遮罩水印",
+      path: "maskwatermark",
+      icon: EyeInvisibleOutlined,
+      element: () => import("../modules/mask-watermark"),
+    },
   ];
-  cacheList: string[] = ["print"];
+  cacheList: string[] = [];
 
   constructor() {
     makeAutoObservable(this);
@@ -34,6 +44,9 @@ class MainStore {
         this.cacheList.push(list);
       }
     }
+  };
+  drgCacheList = (list: string[]) => {
+    this.cacheList = list;
   };
   removeCacheList = (path: string) => {
     return new Promise((resolve, reject) => {
