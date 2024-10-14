@@ -27,6 +27,8 @@ const App: React.FunctionComponent<IAppProps> = observer((props) => {
 
   const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
     mainStore.login(values).then((res) => {
+      console.log(res);
+      
       if (res.status == "success") {
         message.destroy();
         message.success("登录成功");
@@ -155,7 +157,7 @@ const App: React.FunctionComponent<IAppProps> = observer((props) => {
               rules={[{ required: true, message: "请输入你的账号!" }]}
               style={{ width: "100%" }}
             >
-              <Input placeholder="请输入你的账号!" style={{ width: "350px" }} />
+              <Input placeholder="默认管理员：admin" style={{ width: "350px" }} />
             </Form.Item>
 
             <Form.Item<FieldType>
@@ -164,7 +166,7 @@ const App: React.FunctionComponent<IAppProps> = observer((props) => {
               style={{ width: "100%" }}
             >
               <Input.Password
-                placeholder="请输入你的密码!"
+                placeholder="默认管理员密码：admin"
                 style={{ width: "350px" }}
               />
             </Form.Item>
