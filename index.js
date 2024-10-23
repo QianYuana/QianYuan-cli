@@ -28,7 +28,7 @@ if (process.argv.includes("create")) {
 }
 
 async function main() {
-  console.log("欢迎使用小源的脚手架");
+  console.log("欢迎使用秦归的脚手架");
   inquirer
     .prompt([
       {
@@ -61,7 +61,7 @@ async function main() {
         name: "ReactTemplate",
         message: "请选择你要是用的模版？",
         when: (answers) => answers.operation === "React",
-        choices: ["create-react-app", "Vite(默认函数)", "默认小源模版"],
+        choices: ["create-react-app", "Vite(默认函数)", "默认自己搭建的模版"],
       },
       {
         type: "list",
@@ -79,7 +79,7 @@ async function main() {
       },
     ])
     .then(async (answers) => {
-      console.log("请稍等片刻，小源正在为你下载资源...");
+      console.log("请稍等片刻，正在为你下载资源...");
       const { name, operation } = answers;
       const command = operation === "Vue" ? "vue" : "react";
       const spinner = ora(`正在下载 ${operation}项目模版...`).start();
@@ -147,7 +147,7 @@ async function main() {
                 `${operation}-${answers.ReactTemplate} 下载完成！`
               );
             }
-          } else if (answers.ReactTemplate === "默认小源模版") {
+          } else if (answers.ReactTemplate === "默认自己搭建的模版") {
             await createDir("default");
           }
         }

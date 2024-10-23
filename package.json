@@ -9,7 +9,7 @@
   "scripts": {
     "start": "node index.js"
   },
-  "author": "",
+  "author": "QianYuana",
   "license": "ISC",
   "dependencies": {
     "fs-extra": "^11.2.0",
