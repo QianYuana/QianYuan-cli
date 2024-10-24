@@ -93,14 +93,16 @@ const MaskWaterMark: React.FunctionComponent<IAppProps> = (props) => {
   );
   // 1、创建样式
   const useReactStyles = createUseStyles({
-    operation:props=>({
-      padding: "0px 8px",
-      color: " #fff",
-      //可以使用props.btnColor 也可以使用colors
-      //注意 这个一定要放在btn组件的上一级
-      backgroundColor: props,
-      borderColor: props,
-    }) 
+    operation: {
+      // color: " #b81d1d",
+      "& .ant-btn": {
+        padding: "0px 8px",
+        color: "#fff",
+        // 想要穿透ant样式必须这样
+        backgroundColor: (props) => props,
+        borderColor: (props) => props,
+      },
+    },
   });
   const { styles } = useStyles({ btnColor: colors });
   const classes = useReactStyles(colors); // 使用REACT-JSS样式
@@ -118,11 +120,10 @@ const MaskWaterMark: React.FunctionComponent<IAppProps> = (props) => {
               minHeight: 600,
             }}
           >
-            <div>
+            <div className={classes.operation}>
               <Button
                 type="primary"
                 size="large"
-                className={classes.operation}
                 icon={<AntDesignOutlined />}
                 onClick={() => setNum(num + 1)}
               >
