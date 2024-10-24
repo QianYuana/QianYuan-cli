@@ -10,6 +10,7 @@ import {
   ConfigProvider,
 } from "antd";
 import { createStyles, ThemeProvider } from "antd-style";
+import { createUseStyles } from "react-jss";
 
 interface IAppProps {}
 
@@ -90,7 +91,19 @@ const MaskWaterMark: React.FunctionComponent<IAppProps> = (props) => {
       };
     }
   );
+  // 1、创建样式
+  const useReactStyles = createUseStyles({
+    operation:props=>({
+      padding: "0px 8px",
+      color: " #fff",
+      //可以使用props.btnColor 也可以使用colors
+      //注意 这个一定要放在btn组件的上一级
+      backgroundColor: props,
+      borderColor: props,
+    }) 
+  });
   const { styles } = useStyles({ btnColor: colors });
+  const classes = useReactStyles(colors); // 使用REACT-JSS样式
   return (
     <Spin spinning={loading}>
       <div style={{ display: "flex", height: "100%", width: "100%" }}>
@@ -105,10 +118,11 @@ const MaskWaterMark: React.FunctionComponent<IAppProps> = (props) => {
               minHeight: 600,
             }}
           >
-            <div className={styles.operation}>
+            <div>
               <Button
                 type="primary"
                 size="large"
+                className={classes.operation}
                 icon={<AntDesignOutlined />}
                 onClick={() => setNum(num + 1)}
               >
