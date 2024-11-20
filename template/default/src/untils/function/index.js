@@ -1,6 +1,9 @@
-/*
- * 路由配置
- * @param {Object} routeToNameMap 路由列表转为键值对
+//JSDOC语法注释
+/**
+ * @function routeToNameMap 路由列表转成nameMap列表键值对
+ * @param {*} routeList 全部路由列表
+ * @param {*} path    当前路由path
+ * @returns 
  */
 export const routeToNameMap = (routeList, path) => {
   const ac = routeList.reduce((acc, cur) => {
