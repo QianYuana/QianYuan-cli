@@ -29,9 +29,12 @@ const App: React.FC = observer(() => {
 
   useEffect(() => {
     setKey(Math.random());
-    console.log(location.pathname.split("/")[2]);
+    // console.log(location.pathname.split("/")[2]);
 
     if (location.pathname.split("/")[2]) {
+      /**
+       * * 设置浏览器标签头部名称
+       */
       document.title = Utils.routeToNameMap(
         routeList,
         location.pathname.split("/")[2]

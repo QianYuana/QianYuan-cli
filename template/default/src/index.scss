@@ -2,3 +2,10 @@
 @import "./untils/sass/base/colors.scss";
 @import "./untils/sass/base/typography.scss";
 @import "@wangeditor/editor/dist/css/style.css"; // 引入 css
+html[data-theme="light"] {
+  @import "./untils/sass/base/colors.scss";
+}
+
+html[data-theme="dark"] {
+  @import "./untils/sass/base/typography.scss";
+}

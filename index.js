@@ -20,7 +20,13 @@ const version = packageJson.version;
 
 // console.log(process.argv, "ceshi");
 if (process.argv.includes("--version") || process.argv.includes("-v")) {
-  console.log(`create_QianYuan version: ${version}`);
+  console.log(`QianYuan-Cli version: ${version}`);
+  process.exit(0); //立即终止 Node.js 进程的
+}
+if (process.argv.includes("--help") || process.argv.includes("-h")) {
+  console.log(
+    `QianYuan -v/--version -----获取版本号 \nQianYuan -h/--help -----查看帮助信息 \nQianYuan create -----创建项目`
+  );
   process.exit(0); //立即终止 Node.js 进程的
 }
 if (process.argv.includes("create")) {
