@@ -39,6 +39,15 @@ QianYuan --version | -v  // 查看版本
 
 ## 3.模版文件夹（template/default）
 
+### 使用命令
+
+```
+npm run server // 启动服务
+npm run build // 使用webpack打包
+npm run dev // 使用webpack-dev-server启动开发环境
+npm run start // 使用自己封装的QianYuan-cli启动开发环境
+`
+
 ### 模版框架技术选型：
 
 - 语言：React v18 + TypeScript
@@ -78,3 +87,4 @@ QianYuan --version | -v  // 查看版本
   - 样式封装：sass 基础配置 ant-style（目前是使用 antd v5 的 token 编写） 编写 jsx 样式
 - UI 库配置
   - Ant Design 基础配置
+```
