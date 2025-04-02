@@ -69,7 +69,7 @@ const App: React.FC = observer(() => {
             style={{ display: "flex", justifyContent: "center" }}
           >
             <img
-              src="/image/logo1.svg"
+              src="/assets/logo1.svg"
               alt="千源星"
               style={{ width: 32, height: 32 }}
             />
@@ -77,7 +77,7 @@ const App: React.FC = observer(() => {
         ) : (
           <div className="logo">
             <img
-              src="/image/logo1.svg"
+              src="/assets/logo1.svg"
               alt="千源星"
               style={{ width: 32, height: 32, marginRight: 12 }}
             />

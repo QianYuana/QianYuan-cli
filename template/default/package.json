@@ -6,7 +6,8 @@
   "scripts": {
     "server": "node ./data/api.js",
     "build": "webpack --mode production",
-    "start": "concurrently \"node ./data/api.js\" \"webpack-dev-server --mode development --open\"",
+    "start": "concurrently \"node ./data/api.js\" \"QianYuan dev\"",
+    "dev": "concurrently \"node ./data/api.js\" \"webpack serve\"",
     "build:dev": "webpack --mode development"
   },
   "author": "",
@@ -44,7 +45,8 @@
     "ts-loader": "^9.5.1",
     "typescript": "^5.5.3",
     "webpack": "^5.92.1",
-    "webpack-cli": "^5.1.4"
+    "webpack-cli": "^5.1.4",
+    "QianYuan": "../../bin"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.1.0",

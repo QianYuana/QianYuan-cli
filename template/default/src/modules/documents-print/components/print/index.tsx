@@ -68,14 +68,14 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
     let strStyle = baseTableStyle;
     const textHeight: number | any =
       document.getElementById("w-e-textarea-1")?.clientHeight;
-    // window.LODOP.ADD_PRINT_RECT(27,27,634,textHeight,0,1); //打印区域  左 上 右 下
-    let html = printTarget == "document" ? props.html : salesSlip;
+    window.LODOP.ADD_PRINT_RECT(27,27,634,textHeight,0,1); //打印区域  左 上 右 下
+    // let html = ;
     window.LODOP.ADD_PRINT_HTM(
       27,
       27,
       634,
       textHeight,
-      strStyle + "<div id='print-footer'>" + codeRender(html) + "</div>"
+      strStyle + "<div id='print-footer'>" + codeRender(printTarget == "document" ? props.html : salesSlip) + "</div>"
     ); //打印html
     const footerHeight: number | any =
       document.getElementById("print-footer")?.clientHeight;

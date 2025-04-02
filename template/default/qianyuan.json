@@ -1,0 +1,16 @@
+{
+  "entry": "src/index.js",
+  "alias": {
+    "public": "public/",
+    "untils": "src/untils",
+    "components": "src/components",
+    "sassBase": "src/untils/sass/base",
+    "appStore": "src/store"
+  },
+  "outputPath": "dist",
+  "dllPlugin": ["isomorphic-fetch"],
+  "template": ["index.ejs", "mobile.ejs"],
+  "devServer": {
+    "port": 9100
+  }
+}

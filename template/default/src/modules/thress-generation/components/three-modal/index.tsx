@@ -17,8 +17,8 @@ const ThreeModal: React.FunctionComponent<IAppProps> = (props) => {
     const mesh = new THREE.Mesh(geometry, material);
     scene.add(mesh);
     // AxesHelper：辅助观察的坐标系
-    const axesHelper = new THREE.AxesHelper(250);
-    scene.add(axesHelper);
+    // const axesHelper = new THREE.AxesHelper(250);
+    // scene.add(axesHelper);
     //光源
     const pointLight = new THREE.PointLight(0xffffff, 2.0);
     pointLight.decay = 2.0; //设置光源不随距离衰减

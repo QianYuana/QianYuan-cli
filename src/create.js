@@ -1,40 +1,23 @@
-#!/usr/bin/env node
 import inquirer from "inquirer";
 import { exec } from "child_process";
-import ora from "ora";
-import { promisify } from "util";
 import { copy } from "fs-extra";
-import path from "path";
 import { fileURLToPath } from "url";
+import { promisify } from "util";
+import path from "path";
+import ora from "ora";
+import fs from "fs";
+
 const execPromise = promisify(exec);
-import fs, { readFileSync } from "fs";
-// const templateDir = path.resolve("template");
-// 获取当前文件的路径
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
-// 读取 package.json 以获取版本号
-const packageJsonPath = path.join(__dirname, "package.json");
-const packageJson = JSON.parse(readFileSync(packageJsonPath, "utf-8"));
-const version = packageJson.version;
+export default async function main() {
+  // 获取当前文件的路径
+  const filename = fileURLToPath(import.meta.url);
+  // 获取当前文件的目录
+  const dirname = path.dirname(filename);
+  // 获取项目的根目录
+  const projectRoot = path.resolve(dirname, "..");
 
-// console.log(process.argv, "ceshi");
-if (process.argv.includes("--version") || process.argv.includes("-v")) {
-  console.log(`QianYuan-Cli version: ${version}`);
-  process.exit(0); //立即终止 Node.js 进程的
-}
-if (process.argv.includes("--help") || process.argv.includes("-h")) {
-  console.log(
-    `QianYuan -v/--version -----获取版本号 \nQianYuan -h/--help -----查看帮助信息 \nQianYuan create -----创建项目`
-  );
-  process.exit(0); //立即终止 Node.js 进程的
-}
-if (process.argv.includes("create")) {
-  main();
-}
-
-async function main() {
-  console.log("欢迎使用秦归的脚手架");
+  console.log("欢迎使用QianYuan📦工具：");
   inquirer
     .prompt([
       {
@@ -89,7 +72,9 @@ async function main() {
       const { name, operation } = answers;
       const command = operation === "Vue" ? "vue" : "react";
       const spinner = ora(`正在下载 ${operation}项目模版...`).start();
-      const targetDir = process.cwd();
+      const targetDir = process.cwd(); // 当前操作的目标文件夹
+      // console.log(targetDir);
+
       const createDir = async (dir) => {
         fs.mkdir(`./${name}`, (err) => {
           if (err) {
@@ -98,7 +83,7 @@ async function main() {
           }
         });
         // 复制 template 文件夹到目标文件夹
-        const templatePath = path.join(__dirname, `template/${dir}`);
+        const templatePath = path.join(projectRoot, `template/${dir}`);
         await copy(templatePath, `${targetDir}/${name}`);
         // console.log(`模板文件已复制到 ${targetDir}`);
 
@@ -106,7 +91,7 @@ async function main() {
           `cd ./${name} & npm install `
         );
         spinner.succeed(`${operation}模版 下载完成！`);
-        console.log(stdout);
+        // console.log(stdout);
         if (stderr) {
           console.error(`Stderr: ${stderr}`);
         }
@@ -163,4 +148,7 @@ async function main() {
         spinner.fail(`下载 ${operation} 失败: ${error.message}`);
       }
     });
+}
+if (import.meta.url === new URL(import.meta.url).href) {
+  main();
 }
