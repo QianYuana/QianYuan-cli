@@ -24,6 +24,7 @@ cd qianyuan-cli
 在文件夹内进行全局安装
 
 ```
+npm run build  // 打包成lib文件夹的包文件
 npm install -g .
 ```
 

@@ -57,7 +57,7 @@ module.exports = {
         //     options: {
         //       name: '[name].[ext]', // 输出文件的名称
         //       outputPath: 'images/', // 输出目录
-        //       publicPath: 'src/assets/images/', // 公开 URL 路径
+        //       publicPath: 'src/assets/assetss/', // 公开 URL 路径
         //     },
         //   },
         // ],

@@ -53,7 +53,7 @@ const App: React.FunctionComponent<IAppProps> = observer((props) => {
   return (
     <div className="login">
       <img
-        src="/image/login-bg.png"
+        src="/assets/login-bg.png"
         style={{
           position: "absolute",
           top: "0",
@@ -64,7 +64,7 @@ const App: React.FunctionComponent<IAppProps> = observer((props) => {
         }}
       />
       <img
-        src="/image/Saly-1.png"
+        src="/assets/Saly-1.png"
         style={{
           position: "absolute",
           top: "100px",
@@ -74,7 +74,7 @@ const App: React.FunctionComponent<IAppProps> = observer((props) => {
         }}
       />
       <img
-        src="/image/Saly-16.png"
+        src="/assets/Saly-16.png"
         style={{
           position: "absolute",
           bottom: "0px",
@@ -84,7 +84,7 @@ const App: React.FunctionComponent<IAppProps> = observer((props) => {
         }}
       />
       <img
-        src="/image/Saly-18.png"
+        src="/assets/Saly-18.png"
         style={{
           position: "absolute",
           bottom: "0px",
@@ -94,7 +94,7 @@ const App: React.FunctionComponent<IAppProps> = observer((props) => {
         }}
       />
       <img
-        src="/image/Saly-43.png"
+        src="/assets/Saly-43.png"
         style={{
           position: "absolute",
           top: "140px",
@@ -104,7 +104,7 @@ const App: React.FunctionComponent<IAppProps> = observer((props) => {
         }}
       />
       <img
-        src="/image/right-bottom.png"
+        src="/assets/right-bottom.png"
         style={{
           position: "absolute",
           bottom: "0",
@@ -124,7 +124,7 @@ const App: React.FunctionComponent<IAppProps> = observer((props) => {
         }}
       >
         <img
-          src="/image/aircle.png"
+          src="/assets/aircle.png"
           style={{
             display: "inline-block",
             width: "378px",
@@ -139,7 +139,7 @@ const App: React.FunctionComponent<IAppProps> = observer((props) => {
 
       <div className="form-login">
         <img
-          src="/image/logo.png"
+          src="/assets/logo.png"
           alt="千源星"
           style={{ marginLeft: "48px", marginBottom: "12px" }}
         />
