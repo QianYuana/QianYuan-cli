@@ -3,6 +3,7 @@ import {
   PrinterOutlined,
   CodeSandboxOutlined,
   EyeInvisibleOutlined,
+  MailOutlined
 } from "@ant-design/icons";
 interface Res {
   [key: string]: any;
@@ -27,6 +28,12 @@ class MainStore {
       path: "maskwatermark",
       icon: EyeInvisibleOutlined,
       element: () => import("../modules/mask-watermark"),
+    },
+    {
+      name: "发送邮箱",
+      path: "sendemail",
+      icon: MailOutlined,
+      element: () => import("../modules/send-email"),
     },
   ];
   cacheList: string[] = [];

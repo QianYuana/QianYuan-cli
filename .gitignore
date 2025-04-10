@@ -11,7 +11,7 @@ server.xml
 # dihog.dll.js
 # dihog-manifest.json
 web-version.properties
-/dist/
+*dist/
 # /com.amugua.wms.web/.settings/
 # /com.amugua.wms.web/bin/
 # /com.amugua.wms.web/Web/

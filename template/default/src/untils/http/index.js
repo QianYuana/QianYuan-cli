@@ -13,7 +13,7 @@ if (process.env.NODE_ENV == "development") {
 } else if (process.env.NODE_ENV == "debug") {
   http.defaults.baseURL = "https://www.ceshi.com";
 } else if (process.env.NODE_ENV == "production") {
-  http.defaults.baseURL = "https://www.production.com";
+  http.defaults.baseURL = "http://localhost:3000";
 }
 // http.defaults.timeout = 10000;
 
