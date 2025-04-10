@@ -32,6 +32,8 @@ npm install -g .
 
 ```
 QianYuan create   // 创建项目
+QianYuan dev     // 启动项目
+QianYuan build     // 打包项目
 QianYuan help     // 帮助
 QianYuan --version | -v  // 查看版本
 
@@ -46,6 +48,8 @@ npm run server // 启动服务
 npm run build // 使用webpack打包
 npm run dev // 使用webpack-dev-server启动开发环境
 npm run start // 使用自己封装的QianYuan-cli启动开发环境
+npm run qybuild // 使用自己封装的QianYuan-cli打包项目
+
 `
 
 ### 模版框架技术选型：
