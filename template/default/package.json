@@ -8,6 +8,7 @@
     "build": "webpack --mode production",
     "start": "concurrently \"node ./data/api.js\" \"QianYuan dev\"",
     "dev": "concurrently \"node ./data/api.js\" \"webpack serve\"",
+    "qybuild": "concurrently \"node ./data/api.js\" \"QianYuan build\"",
     "build:dev": "webpack --mode development"
   },
   "author": "",
@@ -36,6 +37,7 @@
     "mobx": "^6.13.1",
     "mobx-react": "^9.1.1",
     "mobx-react-lite": "^4.0.7",
+    "QianYuan": "../../bin",
     "react-activation": "^0.12.4",
     "react-jss": "^10.10.0",
     "react-router-dom": "^6.25.1",
@@ -45,8 +47,7 @@
     "ts-loader": "^9.5.1",
     "typescript": "^5.5.3",
     "webpack": "^5.92.1",
-    "webpack-cli": "^5.1.4",
-    "QianYuan": "../../bin"
+    "webpack-cli": "^5.1.4"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.1.0",
@@ -55,6 +56,7 @@
     "@wangeditor/editor-for-react": "^1.0.6",
     "ahooks": "^3.7.8",
     "lodash": "^4.17.21",
+    "nodemailer": "^6.10.0",
     "react-dom": "^18.3.1",
     "three": "^0.148.0",
     "webpack-dev-server": "^5.0.4"

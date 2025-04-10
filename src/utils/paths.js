@@ -44,6 +44,7 @@ function paths(cwd) {
 
   return {
     appDir,
+    appPath: appDir,
     appSrc,
     configFilePath, // 注意：这里可能是null，如果没有找到配置文件
     appNodeModules,

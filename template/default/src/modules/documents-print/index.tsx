@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Spin } from "antd";
-import WangEditor from "./components/wang-editor/index";
+import { WangEditor } from "components";
 import Print from "./components/print";
 interface IAppProps {}
 
